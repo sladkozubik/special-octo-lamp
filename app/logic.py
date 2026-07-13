@@ -1,7 +1,6 @@
-import json
 import random
-from aiogram.types import(InlineKeyboardButton, InlineKeyboardMarkup, Message, ReplyKeyboardMarkup)
-countries ={
+
+countries = {
     "af": "Афганистан",
     "al": "Албания",
     "dz": "Алжир",
@@ -220,13 +219,64 @@ countries ={
     "zm": "Замбия",
     "zw": "Зимбабве"
 }
+CONTINENTS = {
+    "Европа": [
+        "al", "ad", "at", "by", "be", "ba", "bg", "hr", "cy", "cz",
+        "dk", "ee", "fi", "fr", "de", "gr", "hu", "is", "ie", "it",
+        "lv", "li", "lt", "lu", "mt", "md", "mc", "me", "nl",
+        "no", "pl", "pt", "ro", "ru", "sm", "rs", "sk", "si", "es",
+        "se", "ch", "ua", "gb", "va"
+    ],
 
-def create_questions():
-    result = random.sample(list(countries.items()), 4)
+    "Азия": [
+        "af", "am", "az", "bh", "bd", "bt", "bn", "kh", "cn", "ge",
+        "in", "id", "ir", "iq", "il", "jp", "jo", "kz", "kw", "kg",
+        "la", "lb", "my", "mv", "mn", "mm", "np", "kp", "kr", "om",
+        "pk", "ph", "qa", "sa", "sg", "lk", "sy", "tw", "tj", "th",
+        "tl", "tr", "tm", "ae", "uz", "vn", "ye"
+    ],
+
+    "Африка": [
+        "dz", "ao", "bj", "bw", "bf", "bi", "cv", "cm", "cf", "td",
+        "km", "cg", "cd", "dj", "eg", "gq", "er", "sz", "et", "ga",
+        "gm", "gh", "gn", "gw", "ke", "ls", "lr", "ly", "mg",
+        "mw", "ml", "mr", "mu", "ma", "mz", "na", "ne", "ng", "rw",
+        "st", "sn", "sc", "sl", "so", "za", "ss", "sd", "tz", "tg",
+        "tn", "ug", "zm", "zw"
+    ],
+
+    "САмерика": [
+        "ag", "bs", "bb", "bz", "ca", "cr", "cu", "dm", "do", "sv",
+        "gd", "gt", "ht", "hn", "jm", "mx", "ni", "pa", "kn", "lc",
+        "vc", "tt", "us"
+    ],
+
+    "ЮАмерика": [
+        "ar", "bo", "br", "cl", "co", "ec", "gy", "py", "pe", "sr",
+        "uy", "ve"
+    ],
+
+    "Океания": [
+        "au", "fj", "ki", "mh", "fm", "nr", "nz", "pw", "pg", "ws",
+        "sb", "to", "tv", "vu"
+    ]
+}
+
+
+def create_questions(continent=None):
+    if continent:
+        country_list = {
+            iso: countries[iso]
+            for iso in CONTINENTS[continent]
+        }
+    else:
+        country_list = countries
+    result = random.sample(list(country_list.items()), 4)
     answer = result[0]
 
     random.shuffle(result)
     return answer, result
+
 
 def find_iso(iso):
     result = f'w2560/{iso}.png'
