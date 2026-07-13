@@ -1,4 +1,4 @@
-from aiogram.types import KeyboardButton
+from aiogram.types import KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from app.logic import *
 
